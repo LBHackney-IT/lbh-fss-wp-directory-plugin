@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.js": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/js/main.be792b6f.chunk.js",
+    "main.js.map": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/js/main.be792b6f.chunk.js.map",
+    "runtime-main.js": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/js/runtime-main.f0bbaaf7.js",
+    "runtime-main.js.map": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/js/runtime-main.f0bbaaf7.js.map",
+    "static/js/2.ce421f81.chunk.js": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/js/2.ce421f81.chunk.js",
+    "static/js/2.ce421f81.chunk.js.map": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/js/2.ce421f81.chunk.js.map",
+    "index.html": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/index.html",
+    "precache-manifest.22513815816f73e4dd277bb0b6b0ccb0.js": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/precache-manifest.22513815816f73e4dd277bb0b6b0ccb0.js",
+    "service-worker.js": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/service-worker.js",
+    "static/js/2.ce421f81.chunk.js.LICENSE.txt": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/js/2.ce421f81.chunk.js.LICENSE.txt",
+    "static/media/arrow-right.svg": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/media/arrow-right.7c57f75a.svg",
+    "static/media/open-sans-v17-latin-700.woff2": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/media/open-sans-v17-latin-700.0edb7628.woff2",
+    "static/media/open-sans-v17-latin-700.woff": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/media/open-sans-v17-latin-700.1f85e92d.woff",
+    "static/media/open-sans-v17-latin-700.ttf": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/media/open-sans-v17-latin-700.e5111cab.ttf",
+    "static/media/open-sans-v17-latin-regular.ttf": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/media/open-sans-v17-latin-regular.049a929c.ttf",
+    "static/media/open-sans-v17-latin-regular.woff2": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/media/open-sans-v17-latin-regular.33543c5c.woff2",
+    "static/media/open-sans-v17-latin-regular.woff": "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/static/media/open-sans-v17-latin-regular.de0869e3.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f0bbaaf7.js",
+    "static/js/2.ce421f81.chunk.js",
+    "static/js/main.be792b6f.chunk.js"
+  ]
+}
