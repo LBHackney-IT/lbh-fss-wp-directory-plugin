@@ -1,83 +1,78 @@
 import axios from "axios";
-const isMatch = require('lodash/isMatch');
-const filter = require('lodash/filter');
-const some = require('lodash/some');
+import BASE_API_URL from "../BaseApiUrl/BaseApiUrl";
+import qs from "qs";
 
 const GetServices = {
   async retrieveServices({
-    sort = "name",
-    direction = "asc",
-    offset = 0,
-    limit = 10,
     search = "",
-  }) {
-    try {
-      const response = await axios.get("http://localhost:9000/api/services", {
-        params: {
-          sort,
-          direction,
-          offset,
-          limit,
-          search,
-        },
-      });
-
-      return response.data.entries;
-    } catch (error) {
-      console.error(error);
-
-      return false;
-    }
-  },
-  async retrieveServicesByCategory({
-    sort = "name",
-    direction = "asc",
     offset = 0,
-    taxonomyId = "",
-    limit = 151,
-    search = "",
+    taxonomyids = "",
+    limit = 0,
+    postcode = "",
   }) {
-    try {
-      const response = await axios.get("http://localhost:9000/api/services", {
-        params: {
-          sort,
-          direction,
-          offset,   
-          taxonomyId,
-          limit,
-          search,
-        },
-      });
-
-      let data = null;
-
-      if (taxonomyId) {
-        const isCategory = o => isMatch(o, {id: taxonomyId});
-        const allServices = filter(response.data.entries, ({categories}) => categories.some(isCategory));
-
-        console.log("allServices");
-        console.log(allServices);
-        data = allServices;
+    // prepare taxonomies into an array
+    if (taxonomyids.length === 1) {
+      // if only one vocabulary is selected
+      if (Array.isArray(taxonomyids[0])) {
+        taxonomyids = taxonomyids[0];
       } else {
-        data = response.data.entries;
+        taxonomyids = taxonomyids[0].split("+");
       }
-
-      return data;
-    } catch (error) {
-      console.error(error);
-
-      return false;
+    } else if (taxonomyids.length > 1) {
+      // check if elements are array and convert to string by +
+      if (Array.isArray(taxonomyids[0])) {
+        taxonomyids[0] = taxonomyids[0].join("+");
+      }
+      if (Array.isArray(taxonomyids[1])) {
+        taxonomyids[1] = taxonomyids[1].join("+");
+      }
+      // append + before concatenating both categories and demographics array
+      taxonomyids[0] = taxonomyids[0]+"+";
+      taxonomyids = taxonomyids[0].concat(taxonomyids[1]);
+      taxonomyids = taxonomyids.split("+");
     }
-  },
-  async getService(id) {
+    
     try {
-      const response = await axios.get(`http://localhost:9000/api/services/${id}`);
+      const response = await axios.get(`${BASE_API_URL}/services`, {
+        params: {
+          search,
+          offset,
+          taxonomyids,
+          limit,
+          postcode,
+        },
+        paramsSerializer: params => {
+          return qs.stringify(params);
+        }
+      });
 
       return response.data;
     } catch (error) {
       console.error(error);
 
-      return false;
+      return {
+        "services": []
+      };
+    }
+  },
+  async getService({
+    id,
+    postcode = "",
+  }) {
+    try {
+      const response = await axios.get(`${BASE_API_URL}/services/${id}`, {
+        params: {
+          postcode,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error(error);
+
+      return {
+        "service": {"demographic": []}
+      };
     }
   },
 };

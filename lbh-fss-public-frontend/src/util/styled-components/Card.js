@@ -1,131 +1,27 @@
 // import React from 'react';
 import styled from "styled-components";
 import { applyStyleModifiers } from 'styled-components-modifiers';
-import { pink } from "../../settings/colors";
+import { pink, dark, light } from "../../settings";
 import arrowRight from "../../assets/arrow-right.svg";
 import breakpoint from 'styled-components-breakpoint';
 
 export const CARD_MODIFIERS = {
     categoryCard: () => `
-        [data-category-icon="loneliness-or-isolation"] {
-            i {
-                background-color: #DF1995;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="anxiety-or-mental-health"] {
-            i {
-                background-color: #FF6A13;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="safe-and-healthy-body"] {
-            i {
-                background-color: #84BD00;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="exercise-and-wellbeing"] {
-            i {
-                background-color: #E03C31;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="arts-and-creativity"] {
-            i {
-                background-color: #025EA6;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="food-or-shopping"] {
-            i {
-                background-color: #328472;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="faith-led-activities"] {
-            i {
-                background-color: #0085CA;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="money-advice"] {
-            i {
-                background-color: #81312F;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="employment-advice"] {
-            i {
-                background-color: #8031A7;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="housing-advice"] {
-            i {
-                background-color: #2B8CC4;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-        [data-category-icon="immigration-advice"] {
-            i {
-                background-color: #00664F;
-                &::before {
-                    content: "\f007";
-                }
-            }
-        }
-
         i {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             background-color: ${pink[200]};
             height: 50px;
             width: 50px;
-            padding: 5px;
-            border-radius: 100%;
-            margin-right: 10px;
-            opacity: 0.75;
             &::before {
-                font-family: "Font Awesome 5 Free";
-                content: "\f007";
+                display: none;
+                font-family: "Font Awesome 5 Pro";
+                content: "\f086";
+            }
+            svg {
                 font-size: 30px;
-                color: #fff;
+                color: ${light["white"]};
             }
         }
-        .hideVisually {
-            border: 0;
-            clip: rect(0 0 0 0);
-            height: 1px;
-            margin: -1px;
-            overflow: hidden;
-            padding: 0;
-            position: absolute;
-            whiteSpace: nowrap;
-            width: 1px;
-        }
-        .card--container {
+        .fss--card--container {
             display: flex;
             flex-direction: row;
             &::after {
@@ -134,7 +30,7 @@ export const CARD_MODIFIERS = {
                 margin-left: auto;
             }
         }
-        .card--content {
+        .fss--card--content {
             margin-right: 10px;
         }
     `,
@@ -148,8 +44,14 @@ export const CARD_MODIFIERS = {
             font-size: 16px;
         }
         .service--distance {
-            margin-top: 15px;
-            color: #000;
+            color: ${dark["black"]};
+            padding: 0 10px 15px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         img {
             width: 100%;
@@ -159,15 +61,15 @@ export const CARD_MODIFIERS = {
 }
 
 export const Card = styled.div`
-    background: #F8F8F8;
-    border: 1px solid #DEE0E2;
+    background: ${light["grey"]};
+    border: 1px solid ${light["greyBorder"]};
     box-sizing: border-box;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
     border-radius: 3px;
     margin-bottom: 10px;
     cursor: pointer;
 
-    .card--container {
+    .fss--card--container {
         padding: 15px 10px;
     }
     h1, h2, h3, h4 {
@@ -181,7 +83,7 @@ export const Card = styled.div`
         margin-top: 0;
         margin-bottom: 0;
         font-size: 14px;
-        color: #525A5B;
+        color: ${dark["grey"]};
     }
 
     ${applyStyleModifiers(CARD_MODIFIERS)};

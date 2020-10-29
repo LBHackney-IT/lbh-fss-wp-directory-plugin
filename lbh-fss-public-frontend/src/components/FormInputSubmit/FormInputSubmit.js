@@ -6,13 +6,14 @@ import Button from "../Button/Button";
 import { darken } from "polished";
 import {StyledInput} from "../../util/styled-components/StyledInput";
 import {StyledLabel} from "../../util/styled-components/StyledLabel";
+import {green} from "../../settings";
 
 const StyledInputContainer = styled.div`
   position: relative;
 `;
 
 const StyledButton = styled(Button)`
-  background: #A4D65E;
+  background: ${green["bright"]};
   position: absolute;
   top: 5px;
   right: 5px;
@@ -22,13 +23,17 @@ const StyledButton = styled(Button)`
   height: 40px;
   margin: 0;
   &:hover {
-    background-color: ${darken(0.1, "#A4D65E")};
+    background-color: ${darken(0.1, green["bright"])};
   }
 
   &::before {
-    font-family: "Font Awesome 5 Free";
+    display: none;
+    font-family: "Font Awesome 5 Pro";
     font-weight: 900;
-    content: "\f007";
+    content: "\f002";
+  }
+  svg {
+    color: #000;
   }
 
   span {
@@ -47,11 +52,13 @@ const StyledButton = styled(Button)`
 const StyledHelp = styled.p``;
 
 const FormInputSubmit = ({
+  id,
   type,
   name,
   label,
   placeholder,
   register,
+  defaultValue,
   required,
   maxLength,
   minLength,
@@ -62,23 +69,6 @@ const FormInputSubmit = ({
 }) => {
   return (
     <>
-      <StyledLabel htmlFor={name}>{label}</StyledLabel>
-      {help ? <StyledHelp>{help}</StyledHelp> : ""}
-      <StyledInputContainer>
-        <StyledInput
-          aria-label={name}
-          name={name}
-          placeholder={placeholder}
-          type={type}
-          ref={(e) => {
-            register(e, { required, minLength, maxLength, validate });
-            if (inputRef) inputRef.current = e;
-          }}
-          aria-invalid={error ? "true" : "false"}
-        />
-        {/* <StyledButton type="submit" label="Login" disabled={isLoading} /> */}
-        <StyledButton type="submit" label="Submit" />
-      </StyledInputContainer>
       {error && error.type === "required" && (
         <FormError error={`${label} is required.`} />
       )}
@@ -93,16 +83,37 @@ const FormInputSubmit = ({
         />
       )}
       {error && error.message && <FormError error={error.message} />}
+      <StyledLabel htmlFor={name}>{label}</StyledLabel>
+      {help ? <StyledHelp>{help}</StyledHelp> : ""}
+      <StyledInputContainer>
+        <StyledInput
+          id={id}
+          aria-label={name}
+          name={name}
+          placeholder={placeholder}
+          type={type}
+          ref={(e) => {
+            register(e, { required, minLength, maxLength, validate });
+            if (inputRef) inputRef.current = e;
+          }}
+          defaultValue={defaultValue}
+          aria-invalid={error ? "true" : "false"}
+        />
+        {/* <StyledButton type="submit" label="Login" disabled={isLoading} /> */}
+        <StyledButton type="submit" label="Submit" />
+      </StyledInputContainer>
     </>
   );
 };
 
 FormInputSubmit.propTypes = {
+  id: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   register: PropTypes.func,
+  defaultValue: PropTypes.string,
   required: PropTypes.bool,
   maxLength: PropTypes.number,
   minLength: PropTypes.number,

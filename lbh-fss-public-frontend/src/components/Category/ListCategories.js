@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import GetCategories from "../../services/GetCategories/GetCategories";
+import GetTaxonomies from "../../services/GetTaxonomies/GetTaxonomies";
 import CategoryCard from "./CategoryCard";
 import { CardContainer } from "../../util/styled-components/CardContainer";
+import styled from "styled-components";
+import breakpoint from 'styled-components-breakpoint';
+import { light } from "../../settings";
+
+export const ListCategoriesContainer = styled.div`
+    ${breakpoint('md')`
+      position: relative;
+      top: 216px;
+      z-index: 2;
+      background: ${light["white"]};
+    `}
+`;
 
 const ListCategories = ({ categories = [], onClick }) => {
   const [data, setData] = useState([]);
@@ -9,7 +21,7 @@ const ListCategories = ({ categories = [], onClick }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const getCategories = await GetCategories.retrieveCategories({});
+      const getCategories = await GetTaxonomies.retrieveTaxonomies({vocabulary: "category"});
       setData(getCategories || []);
       setIsLoading(false); 
     }
@@ -27,7 +39,7 @@ const ListCategories = ({ categories = [], onClick }) => {
   }
 
   return(
-    <div>
+    <ListCategoriesContainer id="list-categories--container">
       {!data.length ? (
         <h2>No data Found</h2>
       ) : (
@@ -35,18 +47,16 @@ const ListCategories = ({ categories = [], onClick }) => {
           <h3>Explore categories</h3>
           {data.map(category => {
             return (
-              <div>
-                <CategoryCard
-                  key={category.id}
-                  category={category}
-                  onClick={select}
-                />
-              </div>
+              <CategoryCard
+                key={category.id}
+                category={category}
+                onClick={select}
+              />
             );
           })}
         </CardContainer>
       )}
-    </div>
+    </ListCategoriesContainer>
   );
 
 }

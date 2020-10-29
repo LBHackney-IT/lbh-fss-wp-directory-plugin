@@ -19,11 +19,14 @@ const StyledLabel = styled.label`
 const StyledHelp = styled.p``;
 
 const FormInput = ({
+  id,
   type,
   name,
   label,
   placeholder,
   register,
+  defaultValue,
+  autoComplete,
   required,
   maxLength,
   minLength,
@@ -34,19 +37,6 @@ const FormInput = ({
 }) => {
   return (
     <>
-      <StyledLabel htmlFor={name}>{label}</StyledLabel>
-      {help ? <StyledHelp>{help}</StyledHelp> : ""}
-      <StyledInput
-        aria-label={name}
-        name={name}
-        placeholder={placeholder}
-        type={type}
-        ref={(e) => {
-          register(e, { required, minLength, maxLength, validate });
-          if (inputRef) inputRef.current = e;
-        }}
-        aria-invalid={error ? "true" : "false"}
-      />
       {error && error.type === "required" && (
         <FormError error={`${label} is required.`} />
       )}
@@ -61,16 +51,35 @@ const FormInput = ({
         />
       )}
       {error && error.message && <FormError error={error.message} />}
+      <StyledLabel htmlFor={name}>{label}</StyledLabel>
+      {help ? <StyledHelp>{help}</StyledHelp> : ""}
+      <StyledInput
+        id={id}
+        aria-label={name}
+        name={name}
+        placeholder={placeholder}
+        type={type}
+        ref={(e) => {
+          register(e, { required, minLength, maxLength, validate });
+          if (inputRef) inputRef.current = e;
+        }}
+        defaultValue={defaultValue}
+        autoComplete={autoComplete}
+        aria-invalid={error ? "true" : "false"}
+      />
     </>
   );
 };
 
 FormInput.propTypes = {
+  id: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   register: PropTypes.func,
+  defaultValue: PropTypes.string,
+  autoComplete: PropTypes.string,
   required: PropTypes.bool,
   maxLength: PropTypes.number,
   minLength: PropTypes.number,

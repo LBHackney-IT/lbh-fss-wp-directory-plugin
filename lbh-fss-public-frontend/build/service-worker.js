@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/precache-manifest.22513815816f73e4dd277bb0b6b0ccb0.js"
+  "/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/precache-manifest.470dd4e475034f5e504f010fd34b74e1.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -35,5 +35,5 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/wp-content/plugins/fss-directory/lbh-fss-public-frontend/build/index.html"), {
   
-  blacklist: [/^\/_/,/\/[^\/?]+\.[^\/]+$/],
+  blacklist: [/^\/_/,/\/[^/?]+\.[^/]+$/],
 });
